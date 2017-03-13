@@ -12,5 +12,15 @@
             réussi à exécuter le programme pour accomplir une tâche simple :
             afficher ce hello world !
         </p>
+
+        <p>
+            <a href="{{ url }}">Generated url from the Controller</a>
+        </p>
+
+        <p>
+            <a href="{{ path('oc_platform_view', { 'id': advert_id }) }}">
+                Generated url from Twig (use "url" instead of "path" to get an absolute path)
+            </a>
+        </p>
     </body>
 </html>
