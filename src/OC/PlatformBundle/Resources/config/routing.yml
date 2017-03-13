@@ -1,6 +1,12 @@
 # pathes are prefixed with "platform" in app/config/routing.yml
 
 # /* LAB
+oc_platform_home_lab:
+    path: /lab/{content}
+    defaults:
+        _controller: OCPlatformBundle:Lab:index
+        content: "default content"
+
 oc_platform_view_slug:
     path: /{year}/{slug}.{_format}
     defaults:
@@ -9,6 +15,35 @@ oc_platform_view_slug:
     requirements:
         year: \d{4}
         _format: html|xml
+
+oc_platform_error:
+    path: /error
+    defaults:
+        _controller: OCPlatformBundle:Lab:error
+
+oc_platform_go_home:
+    path: /go_home
+    defaults:
+        _controller: OCPlatformBundle:Lab:goHome
+
+oc_platform_encode:
+    path: /encode/{param}
+    defaults:
+        _controller: OCPlatformBundle:Lab:encode
+
+oc_platform_session_var:
+    path: /session-var/{var}/{val}
+    defaults:
+        _controller: OCPlatformBundle:Lab:setSessionVar
+    requirements:
+        var: \D+
+        val: \d+
+
+oc_platform_set_flashbag:
+    path: /flashbag/{value}
+    defaults:
+        _controller: OCPlatformBundle:Lab:setFlashBag
+        value: null
 # LAB */
 
 oc_platform_home:

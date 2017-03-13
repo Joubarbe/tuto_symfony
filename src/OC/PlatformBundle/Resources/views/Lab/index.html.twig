@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <title>Bienvenue sur ma première page avec OpenClassrooms !</title>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Lab</title>
     </head>
     <body>
-        <h1>Hello {{ name }} !</h1>
-
-        <p>
-            <a href="{{ url }}">Generated url from the Controller</a>
-        </p>
-
-        <p>
-            <a href="{{ path('oc_platform_view', { 'id': advert_id }) }}">
-                Generated url from Twig (use "url" instead of "path" to get an absolute path)
-            </a>
-        </p>
-
-        <p>slug/year/format = {{ slug ~ year ~ format }}</p>
+        {{ content }}
+        <br>
+        {% for message in app.session.flashbag.get('info') %}
+            <p>Message flash : {{ message }}</p>
+        {% endfor %}
     </body>
 </html>
