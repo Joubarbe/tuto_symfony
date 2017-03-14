@@ -32,6 +32,9 @@ class LabController extends Controller
                 "format" => $_format,
             ]);
         // Controller shortcut for: $this->get("templating")->render(...);
+
+        // WARNING! $this->render() returns an HTTP response, $this->get("templating")->render() and
+        // $this->renderView() does not (both do the same thing).
     }
 
     public function errorAction() // demo to explain the render() method of the templating service
