@@ -1,4 +1,15 @@
+# we can add parameters here as globals, as in app/config/parameters.yml (and use it with $this->getParameter()):
+parameters:
+    hundred: 100
+
 services:
-#    oc_platform.example:
-#        class: OC\PlatformBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    oc_platform.antispam:
+        class: OC\PlatformBundle\Antispam\OCAntispam # namespace
+        arguments:
+            - "@mailer"   # a service
+            - "%locale%"  # a parameter (defined in app/config/config.yml)
+            - 50          # a scalar
+            - "%hundred%" # a parameter (as defined above)
+
+
+

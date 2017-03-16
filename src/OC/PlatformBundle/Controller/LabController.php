@@ -14,6 +14,12 @@ class LabController extends Controller
 {
     public function indexAction($content)
     {
+        echo "testing services";
+        $antispam = $this->get("oc_platform.antispam");
+        echo $antispam->isSpam("..."); // outputs 1
+        echo $antispam->getHundred();  // outputs 100
+        echo "<br>";
+
         return $this->render("OCPlatformBundle:Lab:index.html.twig", ["content" => $content]);
     }
 
