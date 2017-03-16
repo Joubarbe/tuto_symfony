@@ -1,0 +1,26 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %} {# override the main body for the purpose of the exercise #}
+
+    <h1>Page d'accueuil de notre site</h1>
+
+    <br>
+
+    {% for message in app.session.flashbag.get('info') %}
+        <p class="alert alert-info">Message flash : {{ message }}</p>
+    {% endfor %}
+
+    <ul>
+        {% for ad in ads %}
+            <li>
+                <h2>{{ ad.title }}</h2>
+                <p>{{ ad.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
