@@ -11,7 +11,33 @@
 
     <div class="well">
         {{ advert.content }}
+        {% if advert.image is not null %}
+            <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+        {% endif %}
     </div>
+
+    <div class="well">
+        <ul>
+            {% for application in listApplications %}
+                <li>
+                    <h2>{{ application.author }}</h2>
+                    <p>{{ application.content }}</p>
+                    <small>{{ application.date|date("d/m/Y") }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if not advert.categories is empty %}
+        <p>
+            Cette annonce est parue dans les catégories suivantes :
+            {% for category in advert.categories %}
+                {{ category.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    {% else %}
+        <p>Cette annonce n'est parue dans aucune catégorie.</p>
+    {% endif %}
 
     <p>
         <a href="{{ path('oc_platform_home') }}" class="btn btn-default">
