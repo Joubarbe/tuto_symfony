@@ -1,6 +1,7 @@
 # we can add parameters here as globals, as in app/config/parameters.yml (and use it with $this->getParameter()):
 parameters:
     hundred: 100
+    nb_per_page: 3
 
 services:
     oc_platform.antispam:
