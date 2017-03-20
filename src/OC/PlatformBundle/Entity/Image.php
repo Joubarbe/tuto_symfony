@@ -1,20 +1,17 @@
 <?php
+// src/OC/PlatformBundle/Entity/Image.php
 
 namespace OC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Image
- *
- * @ORM\Table(name="image")
- * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\ImageRepository")
+ * @ORM\Table(name="oc_image")
+ * @ORM\Entity
  */
 class Image
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,24 +19,17 @@ class Image
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="url", type="string", length=255)
      */
     private $url;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="alt", type="string", length=255)
      */
     private $alt;
 
-
     /**
-     * Get id
-     *
-     * @return int
+     * @return mixed
      */
     public function getId()
     {
@@ -47,23 +37,15 @@ class Image
     }
 
     /**
-     * Set url
-     *
-     * @param string $url
-     *
-     * @return Image
+     * @param mixed $id
      */
-    public function setUrl($url)
+    public function setId($id)
     {
-        $this->url = $url;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get url
-     *
-     * @return string
+     * @return mixed
      */
     public function getUrl()
     {
@@ -71,27 +53,26 @@ class Image
     }
 
     /**
-     * Set alt
-     *
-     * @param string $alt
-     *
-     * @return Image
+     * @param mixed $url
      */
-    public function setAlt($alt)
+    public function setUrl($url)
     {
-        $this->alt = $alt;
-
-        return $this;
+        $this->url = $url;
     }
 
     /**
-     * Get alt
-     *
-     * @return string
+     * @return mixed
      */
     public function getAlt()
     {
         return $this->alt;
     }
-}
 
+    /**
+     * @param mixed $alt
+     */
+    public function setAlt($alt)
+    {
+        $this->alt = $alt;
+    }
+}

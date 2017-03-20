@@ -1,20 +1,16 @@
 <?php
+// src/OC/PlatformBundle/Entity/Category.php
 
 namespace OC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
- *
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\CategoryRepository")
+ * @ORM\Entity
  */
 class Category
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,17 +18,12 @@ class Category
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
-
     /**
-     * Get id
-     *
-     * @return int
+     * @return mixed
      */
     public function getId()
     {
@@ -40,26 +31,27 @@ class Category
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Category
+     * @param mixed $id
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * @return mixed
      */
     public function getName()
     {
         return $this->name;
     }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
 }
