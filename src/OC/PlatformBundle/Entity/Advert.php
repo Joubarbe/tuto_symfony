@@ -196,8 +196,13 @@ class Advert
         $this->image = $image;
     }
 
-    public function getImage()
+    public function getImage(): Image
     {
+        if ($this->image === null) {
+            return new Image;
+            // if we don't do that, we have an error, because of the type hinting.
+            // when the form creates itself, it used getters() to fill default values; image is then null and PHP sees that it's supposed to be an Image object.
+        }
         return $this->image;
     }
 

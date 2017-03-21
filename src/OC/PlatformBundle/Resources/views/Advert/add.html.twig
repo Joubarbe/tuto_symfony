@@ -9,10 +9,12 @@
     <h2>Ajouter une annonce</h2>
 
     {{ include("OCPlatformBundle:Advert:form.html.twig") }}
+    {#{{ include("OCPlatformBundle:Advert:formBootstrap.html.twig") }}#}
 
     <p>
         Attention : cette annonce sera ajoutée directement
         sur la page d'accueil après validation du formulaire.
+        (Symfony intègre directement un thème Bootstrap 3 via le fichier app/config/config.yml)
     </p>
 
 {% endblock %}

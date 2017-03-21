@@ -44,6 +44,11 @@ oc_platform_set_flashbag:
     defaults:
         _controller: OCPlatformBundle:Lab:setFlashBag
         value: null
+
+oc_platform_form:
+    path: /form
+    defaults:
+        _controller: OCPlatformBundle:Lab:add
 # LAB */
 
 oc_platform_home:

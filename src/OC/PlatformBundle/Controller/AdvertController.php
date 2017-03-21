@@ -3,6 +3,8 @@
 namespace OC\PlatformBundle\Controller;
 
 use OC\PlatformBundle\Entity\Advert;
+use OC\PlatformBundle\Form\AdvertEditType;
+use OC\PlatformBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -71,39 +73,43 @@ class AdvertController extends Controller
 
     public function addAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $advert = new Advert();
+        $advert->setTitle("Default Title");
+        $form = $this->createForm(AdvertType::class, $advert);
 
-        // On ne sait toujours pas gérer le formulaire, patience cela vient dans la prochaine partie !
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $advert->getImage()->upload(); // not good, the controller shouldn't have to do this; an event should be used
 
-        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($advert);
+            $em->flush();
+
             $this->addFlash('notice', 'Annonce bien enregistrée.');
 
-            //return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+            return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
         }
 
-        return $this->render('OCPlatformBundle:Advert:add.html.twig');
+        return $this->render('OCPlatformBundle:Advert:add.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $advert = $em->getRepository("OCPlatformBundle:Advert")->find($id);
+        $form = $this->createForm(AdvertEditType::class, $advert);
 
-        $advert = $em->getRepository('OCPlatformBundle:Advert')->find($id);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->flush();
 
-        if (null === $advert) {
-            throw $this->createNotFoundException("L'annonce d'id " . $id . " n'existe pas.");
-        }
-
-        // Ici encore, il faudra mettre la gestion du formulaire
-
-        if ($request->isMethod('POST')) {
-            $this->addFlash('notice', 'Annonce bien modifiée.');
+            $this->addFlash('notice', 'Annonce bien enregistrée.');
 
             return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
         }
 
         return $this->render('OCPlatformBundle:Advert:edit.html.twig', array(
-            'advert' => $advert
+            'form' => $form->createView(),
         ));
     }
 
