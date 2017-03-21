@@ -12,7 +12,8 @@
     <div class="well">
         {{ advert.content }}
         {% if advert.image is not null %}
-            <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+            <img src="{{ asset(advert.image.webPath) }}"
+                 alt="{{ advert.image.alt }}">
         {% endif %}
     </div>
 

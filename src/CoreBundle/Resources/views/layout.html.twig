@@ -8,7 +8,12 @@
 
     {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
     <h1>Annonces</h1>
-
+    {% for message in app.session.flashbag.get('notice') %}
+        <p class="alert alert-info">{{ message }}</p>
+    {% endfor %}
+    {% for message in app.session.flashbag.get('info') %}
+        <p class="alert alert-info">{{ message }}</p>
+    {% endfor %}
     <hr>
 
     {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
