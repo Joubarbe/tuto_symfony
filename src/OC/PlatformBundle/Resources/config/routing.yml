@@ -49,6 +49,11 @@ oc_platform_form:
     path: /form
     defaults:
         _controller: OCPlatformBundle:Lab:add
+
+oc_platform_test:
+    path: /test
+    defaults:
+        _controller: OCPlatformBundle:Lab:test
 # LAB */
 
 oc_platform_home:

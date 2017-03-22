@@ -23,12 +23,12 @@ class Image
     /**
      * @ORM\Column(name="url", type="string", length=255)
      */
-    private $url;
+    private $url = "";
 
     /**
      * @ORM\Column(name="alt", type="string", length=255)
      */
-    private $alt;
+    private $alt = "";
 
     // we don't need any Doctrine annotation here
     /**
