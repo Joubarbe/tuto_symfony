@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <p>{{ "site.greet"|trans }} {{ name }}!</p>
+        <p>...</p>
+        <p>{{ "site.bye"|trans({ "%name%": name }) }}</p>
+        <p>{{ "number"|transchoice(1) }}</p>
+        <p>{{ "number"|transchoice(2) }}</p>
+    </body>
+</html>

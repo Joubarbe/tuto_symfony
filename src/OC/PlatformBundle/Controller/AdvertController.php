@@ -185,4 +185,11 @@ class AdvertController extends Controller
             'listAdverts' => $listAdverts
         ));
     }
+
+    public function translationAction($name)
+    {
+        return $this->render('OCPlatformBundle:Advert:translation.html.twig', array(
+            'name' => $name
+        ));
+    }
 }

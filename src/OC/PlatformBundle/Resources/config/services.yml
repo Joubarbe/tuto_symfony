@@ -42,13 +42,13 @@ services:
   oc_platform.beta.html_adder:
     class: OC\PlatformBundle\Beta\BetaHTMLAdder
 
-  oc_platform.beta.listener:
-    class: OC\PlatformBundle\Beta\BetaListener
-    arguments:
-      - "@oc_platform.beta.html_adder"
-      - "2050-01-01"
-    tags:
-      - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+#  oc_platform.beta.listener:
+#    class: OC\PlatformBundle\Beta\BetaListener
+#    arguments:
+#      - "@oc_platform.beta.html_adder"
+#      - "2050-01-01"
+#    tags:
+#      - { name: kernel.event_listener, event: kernel.response, method: processBeta }
 
   oc_platform.bigbrother.message_notificator:
     class: OC\BigbrotherBundle\Bigbrother\MessageNotificator

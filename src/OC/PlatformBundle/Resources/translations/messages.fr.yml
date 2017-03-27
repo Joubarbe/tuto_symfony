@@ -1,0 +1,5 @@
+site:
+  greet: "Bonjour"
+  bye: "Au revoir %name% !"
+
+number: "[0,1]Il y a %count% annonce|[2,+Inf]Il y a %count% annonces"

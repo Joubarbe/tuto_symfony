@@ -9,3 +9,7 @@ core:
 oc_platform:
     resource: "@OCPlatformBundle/Resources/config/routing.yml"
     prefix:   /platform
+
+oc_platform_dev:
+    resource: "@OCPlatformBundle/Resources/config/routing_dev.yml"
+    prefix:   /
