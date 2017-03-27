@@ -7,10 +7,11 @@ services:
   oc_platform.antispam:
     class: OC\PlatformBundle\Antispam\OCAntispam # namespace
     arguments:
-      - "@mailer"   # a service
-      - "%locale%"  # a parameter (defined in app/config/config.yml)
+      - "@mailer"  # a service
       - 50          # a scalar
-      - "%hundred%" # a parameter (as defined above)
+      - "%hundred%"  # a parameter (as defined above)
+    calls:
+      - [ setLocale, [ %locale% ] ] # will be executed after the constructor when you get the service
 
 services:
   oc_platform.email.application_mailer:

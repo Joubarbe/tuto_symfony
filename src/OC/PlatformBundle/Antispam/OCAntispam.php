@@ -11,10 +11,9 @@ class OCAntispam
     private $minLength;
     private $hundred;
 
-    public function __construct(\Swift_Mailer $mailer, $locale, $minLength, $hundred)
+    public function __construct(\Swift_Mailer $mailer, $minLength, $hundred)
     {
         $this->mailer = $mailer;
-        $this->locale = $locale;
         $this->minLength = (int)$minLength;
         $this->hundred = $hundred;
     }
@@ -33,5 +32,10 @@ class OCAntispam
     public function getHundred()
     {
         return $this->hundred;
+    }
+
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
