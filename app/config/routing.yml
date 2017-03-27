@@ -1,3 +1,7 @@
+oc_bigbrother:
+    resource: "@OCBigbrotherBundle/Resources/config/routing.yml"
+    prefix:   /
+
 core:
     resource: "@CoreBundle/Resources/config/routing.yml"
     prefix:   /

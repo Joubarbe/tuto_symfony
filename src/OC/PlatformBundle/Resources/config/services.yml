@@ -49,3 +49,16 @@ services:
       - "2050-01-01"
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+
+  oc_platform.bigbrother.message_notificator:
+    class: OC\BigbrotherBundle\Bigbrother\MessageNotificator
+    arguments:
+        - "@mailer"
+
+  oc_platform.bigbrother.message_listener:
+    class: OC\BigbrotherBundle\Bigbrother\MessageListener
+    arguments:
+      - "@oc_platform.bigbrother.message_notificator"
+      - ["alexandre", "marine", "pierre"] # arbitrary
+    tags:
+      - { name: kernel.event_listener, event: oc_platform.post_message, method: processMessage, priority: 10} # priority is set to 0 by default

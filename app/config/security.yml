@@ -3,7 +3,7 @@
 security:
   encoders:
     Symfony\Component\Security\Core\User\User: plaintext # should use a real encoder like sha5
-    OC\UserBundle\Entity\User: plaintext
+    UserBundle\Entity\User: plaintext
 
   role_hierarchy:
     ROLE_ADMIN:       [ROLE_AUTEUR, ROLE_MODERATEUR]
@@ -32,7 +32,7 @@ security:
     main:
       pattern: ^/
       anonymous: true
-      provider: in_memory
+      provider: in_database
       form_login:
         login_path: login # must NOT be protected by a firewall
         check_path: login_check # MUST be protected by a firewall
