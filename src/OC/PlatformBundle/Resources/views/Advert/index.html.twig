@@ -8,6 +8,17 @@
 
     <h2>Liste des annonces</h2>
 
+    {% if app.user is defined %}
+        Bonjour {{ app.user.username }}
+    {% endif %}
+
+    {% if is_granted('ROLE_AUTEUR') %}
+        <p>Vous avez le rôle "auteur" !</p>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>Vous avez le rôle "admin" !</p>
+    {% endif %}
+
     <ul class="pagination">
         {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
         {% for p in range(1, nbPages) %}

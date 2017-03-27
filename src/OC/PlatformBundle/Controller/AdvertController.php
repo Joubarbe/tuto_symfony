@@ -7,6 +7,7 @@ use OC\PlatformBundle\Form\AdvertEditType;
 use OC\PlatformBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AdvertController extends Controller
 {
@@ -71,8 +72,19 @@ class AdvertController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_AUTEUR') or has_role('ROLE_USER')")
+     */
     public function addAction(Request $request)
     {
+        //// On vérifie que l'utilisateur dispose bien du rôle ROLE_AUTEUR
+        //if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+        //    // Sinon on déclenche une exception « Accès interdit »
+        //    throw $this->createAccessDeniedException('Accès limité aux auteurs.');
+        //}
+        // we use the annotation instead
+        // if you want to check if the user is authenticated, disregarding his role, use the role "IS_AUTHENTICATED_REMEMBERED"
+
         $advert = new Advert();
         $advert->setTitle("Default Title");
         $form = $this->createForm(AdvertType::class, $advert);
@@ -116,6 +128,9 @@ class AdvertController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();

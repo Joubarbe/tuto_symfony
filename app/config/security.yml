@@ -1,24 +1,45 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
+  encoders:
+    Symfony\Component\Security\Core\User\User: plaintext # should use a real encoder like sha5
+    OC\UserBundle\Entity\User: plaintext
 
-    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
-    providers:
-        in_memory:
-            memory: ~
+  role_hierarchy:
+    ROLE_ADMIN:       [ROLE_AUTEUR, ROLE_MODERATEUR]
+    ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-    firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+  providers:
+    in_memory: # arbitrary name for our provider (obviously not secured at all)
+      memory: # provider type
+        users:
+          user:  { password: userpass, roles: [ 'ROLE_AUTEUR' ] }
+          admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+    in_database: # provider name
+      entity: # provider type
+        class:    UserBundle\Entity\User # or UserBundle:User
+        property: username
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    # On crée un pare-feu uniquement pour le formulaire
+    main_login:
+      # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+      pattern:   ^/platform/login$
+      anonymous: true # On autorise alors les anonymes sur ce pare-feu
+    main:
+      pattern: ^/
+      anonymous: false
+      provider: in_database
+      form_login:
+        login_path: login # must NOT be protected by a firewall
+        check_path: login_check # MUST be protected by a firewall
+      logout:
+        path: logout
+        target: /platform
 
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+  access_control:
+      - { path: ^/admin, roles: ROLE_ADMIN }
 
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
-            #form_login: ~
