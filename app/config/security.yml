@@ -31,8 +31,8 @@ security:
       anonymous: true # On autorise alors les anonymes sur ce pare-feu
     main:
       pattern: ^/
-      anonymous: false
-      provider: in_database
+      anonymous: true
+      provider: in_memory
       form_login:
         login_path: login # must NOT be protected by a firewall
         check_path: login_check # MUST be protected by a firewall

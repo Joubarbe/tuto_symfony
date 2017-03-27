@@ -31,7 +31,7 @@ class AdvertType extends AbstractType
             ->add('date', DateTimeType::class)
             ->add('title', TextType::class)
             ->add('author', TextType::class, ["label" => "Your Name"])
-            ->add('content', TextareaType::class)
+            ->add('content', CkeditorType::class)
             ->add('image', ImageType::class, ["required" => false])// a form is a field! (both entities must be associated with Doctrine)
             //->add('categories', CollectionType::class, [ // to use that, uncomment the script in form.html.twig
             //    'entry_type' => CategoryType::class,

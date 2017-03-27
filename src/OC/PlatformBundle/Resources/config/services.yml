@@ -1,27 +1,41 @@
 # we can add parameters here as globals, as in app/config/parameters.yml (and use it with $this->getParameter()):
 parameters:
-    hundred: 100
-    nb_per_page: 3
+  hundred: 100
+  nb_per_page: 3
 
 services:
-    oc_platform.antispam:
-        class: OC\PlatformBundle\Antispam\OCAntispam # namespace
-        arguments:
-            - "@mailer"   # a service
-            - "%locale%"  # a parameter (defined in app/config/config.yml)
-            - 50          # a scalar
-            - "%hundred%" # a parameter (as defined above)
+  oc_platform.antispam:
+    class: OC\PlatformBundle\Antispam\OCAntispam # namespace
+    arguments:
+      - "@mailer"   # a service
+      - "%locale%"  # a parameter (defined in app/config/config.yml)
+      - 50          # a scalar
+      - "%hundred%" # a parameter (as defined above)
 
 services:
-    oc_platform.email.application_mailer:
-        class: OC\PlatformBundle\Email\ApplicationMailer
-        arguments:
-            - "@mailer"
+  oc_platform.email.application_mailer:
+    class: OC\PlatformBundle\Email\ApplicationMailer
+    arguments:
+      - "@mailer"
 
 services:
-    oc_platform.doctrine_listener.application_creation:
-        class: OC\PlatformBundle\DoctrineListener\ApplicationCreationListener
-        arguments:
-            - "@oc_platform.email.application_mailer"
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }
+  oc_platform.doctrine_listener.application_creation:
+    class: OC\PlatformBundle\DoctrineListener\ApplicationCreationListener
+    arguments:
+      - "@oc_platform.email.application_mailer"
+    tags:
+      - { name: doctrine.event_listener, event: postPersist }
+
+services:
+  oc_platform.twig.antispam_extension:
+    class: OC\PlatformBundle\Twig\AntispamExtension
+    arguments:
+      - "@oc_platform.antispam"
+    tags:
+      - { name: twig.extension }
+
+services:
+  oc_platform.form.ckeditor:
+    class: OC\PlatformBundle\Form\CkeditorType
+    tags:
+      - { name: form.type, alias: ckeditor }
