@@ -71,6 +71,18 @@ oc_platform_view:
     requirements:
         id: \d+
 
+oc_platform_view_raw:
+    path: /advertRaw/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:viewRaw
+    requirements:
+        id: \d+
+
+oc_platform_paramconverter:
+    path: /json/{json}
+    defaults:
+        _controller: OCPlatformBundle:Advert:paramConverter
+
 oc_platform_add:
     path: /add
     defaults:

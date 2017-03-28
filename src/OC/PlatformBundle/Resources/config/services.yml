@@ -62,3 +62,8 @@ services:
       - ["alexandre", "marine", "pierre"] # arbitrary
     tags:
       - { name: kernel.event_listener, event: oc_platform.post_message, method: processMessage, priority: 10} # priority is set to 0 by default
+
+  oc_platform.paramconverter.json:
+    class: OC\PlatformBundle\ParamConverter\JsonParamConverter
+    tags:
+      - { name: request.param_converter }

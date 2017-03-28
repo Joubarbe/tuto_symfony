@@ -10,6 +10,8 @@ use OC\PlatformBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class AdvertController extends Controller
 {
@@ -72,6 +74,21 @@ class AdvertController extends Controller
             'listApplications' => $listApplications,
             'listAdvertSkills' => $listAdvertSkills,
         ));
+    }
+
+    public function viewRawAction(Advert $advert) // using a param converter! (DoctrineParamConverter)
+    {
+        return $this->render("OCPlatformBundle:Advert:viewRaw.html.twig", [
+            "advert" => $advert
+        ]);
+    }
+
+    /**
+     * @ParamConverter("json")
+     */
+    public function paramConverterAction($json) // using a custom param converter! (JsonParamConverter)
+    {
+        return new Response(print_r($json, true));
     }
 
     /**
