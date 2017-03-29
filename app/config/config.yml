@@ -78,3 +78,9 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
